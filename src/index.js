@@ -10,7 +10,7 @@ const getFileData = (filepath) => {
   return JSON.parse(file);
 };
 
-const someTempFunction = (filepath1, filepath2) => {
+const genDiff = (filepath1, filepath2) => {
   const data1 = getFileData(filepath1);
   const data2 = getFileData(filepath2);
 
@@ -34,4 +34,4 @@ const someTempFunction = (filepath1, filepath2) => {
 
   return `{\n${result.join('\n')}\n}`;
 };
-export default someTempFunction;
+export default genDiff;
