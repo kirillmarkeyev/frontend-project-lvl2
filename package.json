@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/kirillmarkeyev/frontend-project-lvl2#readme",
   "dependencies": {
+    "@jest/globals": "^27.5.0",
     "commander": "^9.0.0",
     "lodash": "^4.17.21"
   },
