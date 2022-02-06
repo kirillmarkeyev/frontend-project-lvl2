@@ -13,15 +13,21 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-      # Ставим зависимости
+      
       - name: Install dependencies
         run: make install
-      # Запускаем линтер
+      
       - name: Run linter
         run: make lint
-      # Запускаем тесты
+      
       - name: Run tests
         run: make test
-      # Определяем покрытие кода тестами
-      - name: Run code coverage
-        run: make test-coverage
+      # Publish code coverage on Code Climate
+      # https://github.com/paambaati/codeclimate-action
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: <code_climate_reporter_id>
+        with:
+          coverageCommand: make test-coverage 
+          debug: true
