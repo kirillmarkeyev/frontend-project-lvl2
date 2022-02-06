@@ -26,8 +26,9 @@ jobs:
       # https://github.com/paambaati/codeclimate-action
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v3.0.0
+        # Add Code Climate secret key
         env:
-          CC_TEST_REPORTER_ID: 0db36bd30f6e72311f8d586ea14bf69ce257557fe592a06839ec043e3db6369c
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand: make test-coverage 
           debug: true
