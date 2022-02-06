@@ -22,3 +22,6 @@ jobs:
       # Запускаем тесты
       - name: Run tests
         run: make test
+      # Определяем покрытие кода тестами
+      - name: Run code coverage
+        run: make test-coverage
