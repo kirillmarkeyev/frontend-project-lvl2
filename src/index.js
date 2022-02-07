@@ -1,13 +1,26 @@
+import yaml from 'js-yaml';
 import fs from 'fs';
 import process from 'process';
 import path from 'path';
 import _ from 'lodash';
 
+const getFileExtension = (filepath) => path.extname(filepath);
+
 const getFileData = (filepath) => {
   const absoluteFilePath = path.isAbsolute(filepath)
     ? filepath : path.resolve(process.cwd(), filepath);
   const file = fs.readFileSync(absoluteFilePath, 'utf-8');
-  return JSON.parse(file);
+  const extension = getFileExtension(filepath);
+  switch (extension) {
+    case '.json':
+      return JSON.parse(file);
+    case '.yaml':
+      return yaml.load(file);
+    case '.yml':
+      return yaml.load(file);
+    default:
+      throw new Error(`Sorry! File extension: ${extension} is not supported in this version.`);
+  }
 };
 
 const genDiff = (filepath1, filepath2) => {
