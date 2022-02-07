@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-const expectedResult = readFile('expectedPlain.txt');
+const expectedResult = readFile('expectedPlainJSON.txt');
 
 test('check diff for two plain json files', () => {
   const filepath1 = getFixturePath('file1.json');
