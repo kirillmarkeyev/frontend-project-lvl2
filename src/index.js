@@ -20,19 +20,19 @@ const genDiff = (filepath1, filepath2) => {
   const keys2 = _.keys(data2);
   const keys = _.sortBy(_.union(keys1, keys2));
 
-  const result = keys.reduce((acc, key) => {
+  const added = '  + ';
+  const deleted = '  - ';
+  const unchanged = ' '.repeat(4);
+
+  const result = keys.map((key) => {
     if (!_.has(data1, key)) {
-      acc.push(`  + ${key}: ${data2[key]}`);
-    } else if (!_.has(data2, key)) {
-      acc.push(`  - ${key}: ${data1[key]}`);
-    } else if (data1[key] !== data2[key]) {
-      acc.push(`  - ${key}: ${data1[key]}`);
-      acc.push(`  + ${key}: ${data2[key]}`);
-    } else {
-      acc.push(`    ${key}: ${data1[key]}`);
-    }
-    return acc;
-  }, []);
+      return `${added}${key}: ${data2[key]}`;
+    } if (!_.has(data2, key)) {
+      return `${deleted}${key}: ${data1[key]}`;
+    } if (data1[key] !== data2[key]) {
+      return `${deleted}${key}: ${data1[key]}\n${added}${key}: ${data2[key]}`;
+    } return `${unchanged}${key}: ${data1[key]}`;
+  });
 
   return `{\n${result.join('\n')}\n}`;
 };
