@@ -14,7 +14,7 @@ test('check diff for two plain json files', () => {
   const filepath1 = getFixturePath('file1Plain.json');
   const filepath2 = getFixturePath('file2Plain.json');
   const receivedResult = genDiff(filepath1, filepath2);
-  const expectedResult = readFile('expectedPlainJSON.txt');
+  const expectedResult = readFile('expectedPlain.txt');
   expect(receivedResult).toEqual(expectedResult);
   expect(typeof receivedResult).toBe('string');
 });
@@ -23,7 +23,7 @@ test('check diff for two plain yaml files', () => {
   const filepath1 = getFixturePath('file1Plain.yml');
   const filepath2 = getFixturePath('file2Plain.yaml');
   const receivedResult = genDiff(filepath1, filepath2);
-  const expectedResult = readFile('expectedPlainYAML.txt');
+  const expectedResult = readFile('expectedPlain.txt');
   expect(receivedResult).toEqual(expectedResult);
   expect(typeof receivedResult).toBe('string');
 });
