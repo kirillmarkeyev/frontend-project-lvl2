@@ -12,54 +12,54 @@ const getFileData = (filepath) => {
   return result;
 };
 
-const getIndent = (depth, count = 4) => ' '.repeat(depth * count - 2);
+// const getIndent = (depth, count = 4) => ' '.repeat(depth * count - 2);
 
-const getDiffTree = (tree1, tree2) => {
-  const added = '+ ';
-  const deleted = '- ';
-  const unchanged = '  ';
+const getDiffTree = (data1, data2) => {
+  const keys1 = _.keys(data1);
+  const keys2 = _.keys(data2);
+  const keys = _.sortBy(_.union(keys1, keys2));
 
-  const iter = (data1, data2, depth) => {
-    const indent = getIndent(depth);
-    const bracket = `${indent}  `;
+  const diffTree = keys.map((key) => {
+    const value1 = data1[key];
+    const value2 = data2[key];
 
-    const keys1 = _.keys(data1);
-    const keys2 = _.keys(data2);
-    const keys = _.sortBy(_.union(keys1, keys2));
+    if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
+      return {
+        key,
+        type: 'nested',
+        children: getDiffTree(value1, value2),
+      };
+    }
+    if (!_.has(data2, key)) {
+      return {
+        key,
+        type: 'removed',
+        removedValue: value1,
+      };
+    }
+    if (!_.has(data1, key)) {
+      return {
+        key,
+        type: 'added',
+        addedValue: value2,
+      };
+    }
+    if (_.has(data1, key) && _.has(data2, key) && (value1 !== value2)) {
+      return {
+        key,
+        type: 'changed',
+        removedValue: value1,
+        addedValue: value2,
+      };
+    }
+    return {
+      key,
+      type: 'unchanged',
+      unchangedValue: value1,
+    };
+  });
 
-    const diffTree = keys.flatMap((key) => {
-      if (_.isPlainObject(data1[key]) && _.isPlainObject(data2[key])) {
-        if (!_.has(data1, key)) {
-          return `${indent}${added}${key}: {\n${iter(data1[key], data2[key], depth + 1)}\n${bracket}}`;
-        }
-        if (!_.has(data2, key)) {
-          return `${indent}${deleted}${key}: {\n${iter(data1[key], data2[key], depth + 1)}\n${bracket}}`;
-        }
-        if (_.has(data1, key) && _.has(data2, key)) {
-          return `${indent}${unchanged}${key}: {\n${iter(data1[key], data2[key], depth + 1)}\n${bracket}}`;
-        }
-      }
-
-      if (!_.has(data1, key)) {
-        return `${indent}${added}${key}: ${data2[key]}`;
-      }
-
-      if (!_.has(data2, key)) {
-        return `${indent}${deleted}${key}: ${data1[key]}`;
-      }
-
-      if (_.has(data1, key) && _.has(data2, key) && data1[key] !== data2[key]) {
-        return `${indent}${deleted}${key}: ${data1[key]}\n${indent}${added}${key}: ${data2[key]}`;
-      }
-
-      return `${indent}${unchanged}${key}: ${data1[key]}`;
-    });
-
-    return diffTree.join('\n');
-  };
-  const tree = iter(tree1, tree2, 1);
-
-  return `{\n${tree}\n}`;
+  return diffTree;
 };
 
 const genDiff = (filepath1, filepath2) => {
