@@ -13,8 +13,6 @@ const getFileData = (filepath) => {
   return result;
 };
 
-// const getIndent = (depth, count = 4) => ' '.repeat(depth * count - 2);
-
 const getDiffTree = (data1, data2) => {
   const keys1 = _.keys(data1);
   const keys2 = _.keys(data2);

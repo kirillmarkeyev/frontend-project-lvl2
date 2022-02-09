@@ -26,18 +26,18 @@ test('check diff for two plain yaml files', () => {
   expect(receivedResult).toEqual(expectedResult);
 });
 
-// test('check diff for two nested json files', () => {
-//   const filepath1 = getFixturePath('file1.json');
-//   const filepath2 = getFixturePath('file2.json');
-//   const receivedResult = genDiff(filepath1, filepath2);
-//   const expectedResult = readFile('expected.txt');
-//   expect(receivedResult).toEqual(expectedResult);
-// });
+test('check diff for two nested json files', () => {
+  const filepath1 = getFixturePath('file1.json');
+  const filepath2 = getFixturePath('file2.json');
+  const receivedResult = genDiff(filepath1, filepath2);
+  const expectedResult = readFile('expected.txt');
+  expect(receivedResult).toEqual(expectedResult);
+});
 
-// test('check diff for two nested yaml files', () => {
-//   const filepath1 = getFixturePath('file1.yaml');
-//   const filepath2 = getFixturePath('file2.yaml');
-//   const receivedResult = genDiff(filepath1, filepath2);
-//   const expectedResult = readFile('expected.txt');
-//   expect(receivedResult).toEqual(expectedResult);
-// });
+test('check diff for two nested yaml files', () => {
+  const filepath1 = getFixturePath('file1.yaml');
+  const filepath2 = getFixturePath('file2.yaml');
+  const receivedResult = genDiff(filepath1, filepath2);
+  const expectedResult = readFile('expected.txt');
+  expect(receivedResult).toEqual(expectedResult);
+});
