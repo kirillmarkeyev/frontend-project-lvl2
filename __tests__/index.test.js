@@ -16,6 +16,7 @@ test('check diff for two plain json files', () => {
   const receivedResult = genDiff(filepath1, filepath2);
   const expectedResult = readFile('expectedPlain.txt');
   expect(receivedResult).toEqual(expectedResult);
+  expect(typeof receivedResult).toBe('string');
 });
 
 test('check diff for two plain yaml files', () => {
@@ -24,6 +25,7 @@ test('check diff for two plain yaml files', () => {
   const receivedResult = genDiff(filepath1, filepath2);
   const expectedResult = readFile('expectedPlain.txt');
   expect(receivedResult).toEqual(expectedResult);
+  expect(typeof receivedResult).toBe('string');
 });
 
 test('check diff for two nested json files', () => {
@@ -32,6 +34,7 @@ test('check diff for two nested json files', () => {
   const receivedResult = genDiff(filepath1, filepath2);
   const expectedResult = readFile('expected.txt');
   expect(receivedResult).toEqual(expectedResult);
+  expect(typeof receivedResult).toBe('string');
 });
 
 test('check diff for two nested yaml files', () => {
@@ -40,4 +43,5 @@ test('check diff for two nested yaml files', () => {
   const receivedResult = genDiff(filepath1, filepath2);
   const expectedResult = readFile('expected.txt');
   expect(receivedResult).toEqual(expectedResult);
+  expect(typeof receivedResult).toBe('string');
 });
