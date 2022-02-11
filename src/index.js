@@ -61,7 +61,7 @@ const getDiffTree = (data1, data2) => {
   return diffTree;
 };
 
-const genDiff = (filepath1, filepath2, formatName) => {
+const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   const data1 = getFileData(filepath1);
   const data2 = getFileData(filepath2);
 
