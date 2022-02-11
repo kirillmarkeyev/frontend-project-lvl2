@@ -3,7 +3,7 @@ import process from 'process';
 import path from 'path';
 import _ from 'lodash';
 import getParsedFile from './parsers.js';
-import stylish from './formatters/stylish.js';
+import getFormattedDiffTree from './formatters/index.js';
 
 const getFileData = (filepath) => {
   const absoluteFilePath = path.isAbsolute(filepath)
@@ -61,12 +61,12 @@ const getDiffTree = (data1, data2) => {
   return diffTree;
 };
 
-const genDiff = (filepath1, filepath2) => {
+const genDiff = (filepath1, filepath2, formatName) => {
   const data1 = getFileData(filepath1);
   const data2 = getFileData(filepath2);
 
   const diffTree = getDiffTree(data1, data2);
-  const formattedDiffTree = stylish(diffTree);
+  const formattedDiffTree = getFormattedDiffTree(diffTree, formatName);
 
   return formattedDiffTree;
 };
