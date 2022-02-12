@@ -38,7 +38,7 @@ const getDiffTree = (nodes) => {
 
 const plain = (diffTree) => {
   const result = diffTree.map((nodes) => getDiffTree(nodes));
-  return result.join('').trim(); // Метод str.trim() удаляет пробельны с начала и конца строки
+  return result.join('').trim(); // Метод str.trim() удаляет пробелы с начала и конца строки
 };
 
 export default plain;
