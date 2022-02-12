@@ -10,38 +10,38 @@ const __dirname = path.dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-test('check diff for two plain json files', () => {
-  const filepath1 = getFixturePath('file1Plain.json');
-  const filepath2 = getFixturePath('file2Plain.json');
-  const receivedResult = genDiff(filepath1, filepath2);
-  const expectedResult = readFile('expectedPlain.txt');
-  expect(receivedResult).toEqual(expectedResult);
-  expect(typeof receivedResult).toBe('string');
-});
-
-test('check diff for two plain yaml files', () => {
-  const filepath1 = getFixturePath('file1Plain.yml');
-  const filepath2 = getFixturePath('file2Plain.yaml');
-  const receivedResult = genDiff(filepath1, filepath2);
-  const expectedResult = readFile('expectedPlain.txt');
-  expect(receivedResult).toEqual(expectedResult);
-  expect(typeof receivedResult).toBe('string');
-});
-
-test('check diff for two nested json files', () => {
+test('#1 check diff for two json files (stylish)', () => {
   const filepath1 = getFixturePath('file1.json');
   const filepath2 = getFixturePath('file2.json');
-  const receivedResult = genDiff(filepath1, filepath2);
-  const expectedResult = readFile('expected.txt');
+  const receivedResult = genDiff(filepath1, filepath2, 'stylish');
+  const expectedResult = readFile('stylish.txt');
   expect(receivedResult).toEqual(expectedResult);
   expect(typeof receivedResult).toBe('string');
 });
 
-test('check diff for two nested yaml files', () => {
+test('#2 check diff for two yaml files (stylish)', () => {
   const filepath1 = getFixturePath('file1.yaml');
   const filepath2 = getFixturePath('file2.yaml');
-  const receivedResult = genDiff(filepath1, filepath2);
-  const expectedResult = readFile('expected.txt');
+  const receivedResult = genDiff(filepath1, filepath2, 'stylish');
+  const expectedResult = readFile('stylish.txt');
+  expect(receivedResult).toEqual(expectedResult);
+  expect(typeof receivedResult).toBe('string');
+});
+
+test('#3 check diff for two json files (plain)', () => {
+  const filepath1 = getFixturePath('file1.json');
+  const filepath2 = getFixturePath('file2.json');
+  const receivedResult = genDiff(filepath1, filepath2, 'plain');
+  const expectedResult = readFile('plain.txt');
+  expect(receivedResult).toEqual(expectedResult);
+  expect(typeof receivedResult).toBe('string');
+});
+
+test('#4 check diff for two yaml files (plain)', () => {
+  const filepath1 = getFixturePath('file1.yaml');
+  const filepath2 = getFixturePath('file2.yaml');
+  const receivedResult = genDiff(filepath1, filepath2, 'plain');
+  const expectedResult = readFile('plain.txt');
   expect(receivedResult).toEqual(expectedResult);
   expect(typeof receivedResult).toBe('string');
 });
