@@ -42,8 +42,8 @@ const getDiffTree = (nodes) => {
 };
 
 const stylish = (diffTree) => {
-  const lines = diffTree.map((node) => getDiffTree(node));
-  return `{${lines.join('')}\n}`;
+  const result = diffTree.map((nodes) => getDiffTree(nodes));
+  return `{${result.join('')}\n}`;
 };
 
 export default stylish;
