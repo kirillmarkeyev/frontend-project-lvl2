@@ -1,22 +1,44 @@
+import _ from 'lodash';
+
+// https://ru.hexlet.io/challenges/js_trees_stringify_exercise
+
+const stringify = (value) => {
+  if (_.isPlainObject(value)) {
+    return '[complex value]';
+  }
+  if (typeof value === 'string') {
+    return `'${value}'`;
+  }
+  return value;
+};
+
+const getDiffTree = (nodes) => {
+  const iter = (node, fullName = '') => {
+    const {
+      key, type, children, removedValue, addedValue,
+    } = node;
+    const currentName = `${fullName}${key}`;
+    switch (type) {
+      case 'nested':
+        return children.map((child) => iter(child, `${currentName}.`)).join('');
+      case 'unchanged':
+        return ''; // Вывод для неизменившихся узлов делать не нужно
+      case 'added':
+        return `Property '${currentName}' was ${type} with value: ${stringify(addedValue)}\n`;
+      case 'removed':
+        return `Property '${currentName}' was ${type}\n`;
+      case 'changed':
+        return `Property '${currentName}' was updated. From ${stringify(removedValue)} to ${stringify(addedValue)}\n`;
+      default:
+        throw new Error(`Sorry! Type: ${type} is unknown.`);
+    }
+  };
+  return iter(nodes);
+};
+
 const plain = (diffTree) => {
-  const lines = diffTree
-    .filter((node) => node.type !== 'unchanged')
-    .map((node) => {
-      const {
-        key, type, removedValue, addedValue,
-      } = node;
-      switch (type) {
-        case 'added':
-          return `Property '${key}' was ${type} with value: '${addedValue}'`;
-        case 'removed':
-          return `Property '${key}' was ${type}`;
-        case 'changed':
-          return `Proprty '${key}' was updated. From '${removedValue}' to '${addedValue}'`;
-        default:
-          throw new Error(`Unknown type: ${type}`);
-      }
-    });
-  return lines.join('\n');
+  const result = diffTree.map((nodes) => getDiffTree(nodes));
+  return result.join('').trim(); // Метод str.trim() удаляет пробельны с начала и конца строки
 };
 
 export default plain;
