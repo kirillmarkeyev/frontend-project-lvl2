@@ -45,3 +45,21 @@ test('#4 check diff for two yaml files (plain)', () => {
   expect(receivedResult).toEqual(expectedResult);
   expect(typeof receivedResult).toBe('string');
 });
+
+test('#5 check diff for two json files (json)', () => {
+  const filepath1 = getFixturePath('file1.json');
+  const filepath2 = getFixturePath('file2.json');
+  const receivedResult = genDiff(filepath1, filepath2, 'json');
+  const expectedResult = readFile('json.txt');
+  expect(receivedResult).toEqual(expectedResult);
+  expect(typeof receivedResult).toBe('string');
+});
+
+test('#6 check diff for two yaml files (json)', () => {
+  const filepath1 = getFixturePath('file1.yaml');
+  const filepath2 = getFixturePath('file2.yaml');
+  const receivedResult = genDiff(filepath1, filepath2, 'json');
+  const expectedResult = readFile('json.txt');
+  expect(receivedResult).toEqual(expectedResult);
+  expect(typeof receivedResult).toBe('string');
+});
