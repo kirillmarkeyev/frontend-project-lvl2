@@ -20,7 +20,7 @@ const stringify = (value, depth) => {
 const getDiffTree = (nodes) => {
   const iter = (node, depth = 1) => {
     const {
-      key, type, children, removedValue, addedValue, unchangedValue,
+      type, key, children, removedValue, addedValue, unchangedValue,
     } = node;
 
     switch (type) {

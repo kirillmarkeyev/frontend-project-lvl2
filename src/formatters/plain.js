@@ -15,7 +15,7 @@ const stringify = (value) => {
 const getDiffTree = (nodes) => {
   const iter = (node, fullName = '') => {
     const {
-      key, type, children, removedValue, addedValue,
+      type, key, children, removedValue, addedValue,
     } = node;
     const currentName = `${fullName}${key}`;
     switch (type) {

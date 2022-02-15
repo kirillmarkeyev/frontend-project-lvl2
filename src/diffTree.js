@@ -11,36 +11,36 @@ const getDiffTree = (data1, data2) => {
 
     if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
       return {
-        key,
         type: 'nested',
+        key,
         children: getDiffTree(value1, value2),
       };
     }
     if (!_.has(data2, key)) {
       return {
-        key,
         type: 'removed',
+        key,
         removedValue: value1,
       };
     }
     if (!_.has(data1, key)) {
       return {
-        key,
         type: 'added',
+        key,
         addedValue: value2,
       };
     }
     if (_.has(data1, key) && _.has(data2, key) && (value1 !== value2)) {
       return {
-        key,
         type: 'changed',
+        key,
         removedValue: value1,
         addedValue: value2,
       };
     }
     return {
-      key,
       type: 'unchanged',
+      key,
       unchangedValue: value1,
     };
   });
