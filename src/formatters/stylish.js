@@ -19,23 +19,19 @@ const stringify = (value, depth) => {
 
 const getDiffTree = (nodes) => {
   const iter = (node, depth = 1) => {
-    const {
-      type, key, children, removedValue, addedValue, unchangedValue,
-    } = node;
-
-    switch (type) {
+    switch (node.type) {
       case 'nested':
-        return `\n${getIndent(depth)}  ${key}: {${children.map((child) => iter(child, depth + 1)).join('')}\n${getIndent(depth)}  }`;
+        return `\n${getIndent(depth)}  ${node.key}: {${node.children.map((child) => iter(child, depth + 1)).join('')}\n${getIndent(depth)}  }`;
       case 'unchanged':
-        return `\n${getIndent(depth)}  ${key}: ${stringify(unchangedValue, depth + 1)}`;
+        return `\n${getIndent(depth)}  ${node.key}: ${stringify(node.unchangedValue, depth + 1)}`;
       case 'changed':
-        return `\n${getIndent(depth)}- ${key}: ${stringify(removedValue, depth + 1)}\n${getIndent(depth)}+ ${key}: ${stringify(addedValue, depth + 1)}`;
+        return `\n${getIndent(depth)}- ${node.key}: ${stringify(node.removedValue, depth + 1)}\n${getIndent(depth)}+ ${node.key}: ${stringify(node.addedValue, depth + 1)}`;
       case 'added':
-        return `\n${getIndent(depth)}+ ${key}: ${stringify(addedValue, depth + 1)}`;
+        return `\n${getIndent(depth)}+ ${node.key}: ${stringify(node.addedValue, depth + 1)}`;
       case 'removed':
-        return `\n${getIndent(depth)}- ${key}: ${stringify(removedValue, depth + 1)}`;
+        return `\n${getIndent(depth)}- ${node.key}: ${stringify(node.removedValue, depth + 1)}`;
       default:
-        throw new Error(`Sorry! Type: ${type} is unknown.`);
+        throw new Error(`Sorry! Type: ${node.type} is unknown.`);
     }
   };
   return iter(nodes);

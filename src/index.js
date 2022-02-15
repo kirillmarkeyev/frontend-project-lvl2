@@ -5,8 +5,10 @@ import getParsedData from './parsers.js';
 import getDiffTree from './diffTree.js';
 import getFormattedDiffTree from './formatters/index.js';
 
+const getAbsolutePath = (filepath) => path.resolve(process.cwd(), filepath);
+
 const getFileData = (filepath) => {
-  const absoluteFilePath = path.resolve(process.cwd(), filepath);
+  const absoluteFilePath = getAbsolutePath(filepath);
   return fs.readFileSync(absoluteFilePath, 'utf-8');
 };
 

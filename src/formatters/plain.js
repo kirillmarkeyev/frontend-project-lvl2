@@ -14,23 +14,20 @@ const stringify = (value) => {
 
 const getDiffTree = (nodes) => {
   const iter = (node, fullName = '') => {
-    const {
-      type, key, children, removedValue, addedValue,
-    } = node;
-    const currentName = `${fullName}${key}`;
-    switch (type) {
+    const currentName = `${fullName}${node.key}`;
+    switch (node.type) {
       case 'nested':
-        return children.map((child) => iter(child, `${currentName}.`)).join('');
+        return node.children.map((child) => iter(child, `${currentName}.`)).join('');
       case 'unchanged':
         return ''; // Вывод для неизменившихся узлов делать не нужно
       case 'added':
-        return `Property '${currentName}' was ${type} with value: ${stringify(addedValue)}\n`;
+        return `Property '${currentName}' was ${node.type} with value: ${stringify(node.addedValue)}\n`;
       case 'removed':
-        return `Property '${currentName}' was ${type}\n`;
+        return `Property '${currentName}' was ${node.type}\n`;
       case 'changed':
-        return `Property '${currentName}' was updated. From ${stringify(removedValue)} to ${stringify(addedValue)}\n`;
+        return `Property '${currentName}' was updated. From ${stringify(node.removedValue)} to ${stringify(node.addedValue)}\n`;
       default:
-        throw new Error(`Sorry! Type: ${type} is unknown.`);
+        throw new Error(`Sorry! Type: ${node.type} is unknown.`);
     }
   };
   return iter(nodes);
