@@ -13,13 +13,11 @@ const getFileData = (filepath) => {
 const getFileFormat = (filepath) => path.extname(filepath).slice(1);
 
 const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
-  const file1 = getFileData(filepath1);
-  const file2 = getFileData(filepath2);
-
-  const data1 = getParsedData(getFileFormat(filepath1), file1);
-  const data2 = getParsedData(getFileFormat(filepath2), file2);
+  const data1 = getParsedData(getFileFormat(filepath1), getFileData(filepath1));
+  const data2 = getParsedData(getFileFormat(filepath2), getFileData(filepath2));
 
   const diffTree = getDiffTree(data1, data2);
+
   const formattedDiffTree = getFormattedDiffTree(diffTree, formatName);
 
   return formattedDiffTree;
