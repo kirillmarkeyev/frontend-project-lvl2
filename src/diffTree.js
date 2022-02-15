@@ -3,7 +3,8 @@ import _ from 'lodash';
 const getDiffTree = (data1, data2) => {
   const keys1 = _.keys(data1);
   const keys2 = _.keys(data2);
-  const keys = _.sortBy(_.union(keys1, keys2));
+  const unionKeys = _.union(keys1, keys2);
+  const keys = _.sortBy(unionKeys);
 
   const diffTree = keys.map((key) => {
     const value1 = data1[key];
