@@ -21,7 +21,7 @@ const getDiffTree = (nodes) => {
       case 'unchanged':
         return ''; // Вывод для неизменившихся узлов делать не нужно
       case 'added':
-        return `Property '${currentName}' was ${node.type} with value: ${stringify(node.addedValue)}\n`;
+        return `Property '${currentName}' was ${node.type} with value: ${stringify(node.value)}\n`;
       case 'removed':
         return `Property '${currentName}' was ${node.type}\n`;
       case 'changed':

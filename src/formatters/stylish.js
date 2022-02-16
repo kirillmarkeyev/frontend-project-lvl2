@@ -3,6 +3,12 @@ import _ from 'lodash';
 const spacesCount = 4;
 const getIndent = (depth) => ' '.repeat(depth * spacesCount - 2);
 
+const signs = {
+  added: '+ ',
+  removed: '- ',
+  unchanged: '  ',
+};
+
 // https://ru.hexlet.io/challenges/js_trees_stringify_exercise
 
 const stringify = (value, depth) => {
@@ -22,14 +28,12 @@ const getDiffTree = (nodes) => {
     switch (node.type) {
       case 'nested':
         return `\n${getIndent(depth)}  ${node.key}: {${node.children.map((child) => iter(child, depth + 1)).join('')}\n${getIndent(depth)}  }`;
-      case 'unchanged':
-        return `\n${getIndent(depth)}  ${node.key}: ${stringify(node.unchangedValue, depth + 1)}`;
       case 'changed':
         return `\n${getIndent(depth)}- ${node.key}: ${stringify(node.removedValue, depth + 1)}\n${getIndent(depth)}+ ${node.key}: ${stringify(node.addedValue, depth + 1)}`;
+      case 'unchanged':
       case 'added':
-        return `\n${getIndent(depth)}+ ${node.key}: ${stringify(node.addedValue, depth + 1)}`;
       case 'removed':
-        return `\n${getIndent(depth)}- ${node.key}: ${stringify(node.removedValue, depth + 1)}`;
+        return `\n${getIndent(depth)}${signs[node.type]}${node.key}: ${stringify(node.value, depth + 1)}`;
       default:
         throw new Error(`Sorry! Type: ${node.type} is unknown.`);
     }

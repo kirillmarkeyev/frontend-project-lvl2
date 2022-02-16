@@ -20,14 +20,14 @@ const getDiffTree = (data1, data2) => {
       return {
         type: 'removed',
         key,
-        removedValue: value1,
+        value: value1,
       };
     }
     if (!_.has(data1, key)) {
       return {
         type: 'added',
         key,
-        addedValue: value2,
+        value: value2,
       };
     }
     if (_.has(data1, key) && _.has(data2, key) && (value1 !== value2)) {
@@ -41,7 +41,7 @@ const getDiffTree = (data1, data2) => {
     return {
       type: 'unchanged',
       key,
-      unchangedValue: value1,
+      value: value1,
     };
   });
   return diffTree;
