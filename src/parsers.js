@@ -5,7 +5,6 @@ const getParsedData = (format, dataWithoutParsing) => {
     case 'json':
       return JSON.parse(dataWithoutParsing);
     case 'yaml':
-      return yaml.load(dataWithoutParsing);
     case 'yml':
       return yaml.load(dataWithoutParsing);
     default:
