@@ -16,7 +16,6 @@ test('#1 check diff for two json files (stylish)', () => {
   const receivedResult = genDiff(filepath1, filepath2, 'stylish');
   const expectedResult = readFile('stylish.txt');
   expect(receivedResult).toEqual(expectedResult);
-  expect(typeof receivedResult).toBe('string');
 });
 
 test('#2 check diff for two yaml files (stylish)', () => {
@@ -25,7 +24,6 @@ test('#2 check diff for two yaml files (stylish)', () => {
   const receivedResult = genDiff(filepath1, filepath2, 'stylish');
   const expectedResult = readFile('stylish.txt');
   expect(receivedResult).toEqual(expectedResult);
-  expect(typeof receivedResult).toBe('string');
 });
 
 test('#3 check diff for two json files (plain)', () => {
@@ -34,7 +32,6 @@ test('#3 check diff for two json files (plain)', () => {
   const receivedResult = genDiff(filepath1, filepath2, 'plain');
   const expectedResult = readFile('plain.txt');
   expect(receivedResult).toEqual(expectedResult);
-  expect(typeof receivedResult).toBe('string');
 });
 
 test('#4 check diff for two yaml files (plain)', () => {
@@ -43,7 +40,6 @@ test('#4 check diff for two yaml files (plain)', () => {
   const receivedResult = genDiff(filepath1, filepath2, 'plain');
   const expectedResult = readFile('plain.txt');
   expect(receivedResult).toEqual(expectedResult);
-  expect(typeof receivedResult).toBe('string');
 });
 
 test('#5 check diff for two json files (json)', () => {
@@ -52,7 +48,6 @@ test('#5 check diff for two json files (json)', () => {
   const receivedResult = genDiff(filepath1, filepath2, 'json');
   const expectedResult = readFile('json.txt');
   expect(receivedResult).toEqual(expectedResult);
-  expect(typeof receivedResult).toBe('string');
 });
 
 test('#6 check diff for two yaml files (json)', () => {
@@ -61,5 +56,4 @@ test('#6 check diff for two yaml files (json)', () => {
   const receivedResult = genDiff(filepath1, filepath2, 'json');
   const expectedResult = readFile('json.txt');
   expect(receivedResult).toEqual(expectedResult);
-  expect(typeof receivedResult).toBe('string');
 });
