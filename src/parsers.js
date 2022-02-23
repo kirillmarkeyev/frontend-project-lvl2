@@ -8,7 +8,7 @@ const getParsedData = (format, dataWithoutParsing) => {
     case 'yml':
       return yaml.load(dataWithoutParsing);
     default:
-      throw new Error('Sorry! This format is not supported in the current version.');
+      throw new Error(`Sorry! Format: ${format} is not supported in this version.`);
   }
 };
 export default getParsedData;
